@@ -11,11 +11,11 @@ The following data analysis values are available:
   - Voltage range_______: Avrange  
   - Maximum data value: Amax  
   - Minimum data value: Amin  
-  - Average voltage___: Aaverage  
-  - RMS voltage_______: Avrms  
-  - Standard deviation: Asdev  
-  - Signal Frequency__: Afreqm  (Uses the signal mid point crossing point to determine the frequency)  
-  - Signal frequency__: Afreq   (Uses digital signal processing techniques)   
+  - Average voltage_____: Aaverage  
+  - RMS voltage_________: Avrms  
+  - Standard deviation__: Asdev  
+  - Signal Frequency____: Afreqm  (Uses the signal mid point crossing point to determine the frequency)  
+  - Signal frequency____: Afreq   (Uses digital signal processing techniques)   
 
 A useful integer padding function is also available ( mylib.DRPpad(I, n, " ") )  
   - This returns a string using integer I, with a width of n characters, left padded with the character within the quotes.  
