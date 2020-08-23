@@ -1,0 +1,23 @@
+# Syntax Colouring Map For ADC #
+################################
+# Datatypes (KEYWORD1)
+
+ADCDRP		KEYWORD1
+Avrange		KEYWORD1
+
+Afreq		KEYWORD1
+Afreqm		KEYWORD1
+
+Aaverage	KEYWORD1
+Avrms		KEYWORD1
+Amax		KEYWORD1
+Amin		KEYWORD1
+Asdev		KEYWORD1
+
+# Methods and Functions (KEYWORD2)
+
+analyse	KEYWORD2
+graph	KEYWORD2
+DRPpad	KEYWORD2
+
+
