@@ -8,14 +8,14 @@ It includes two Serial monitor graph options:
 
 Data analysis requires the data sampling frequency, voltage reference, array size and the name of the array.  
 The following data analysis values are available:  
-  - Voltage range_______: Avrange  
-  - Maximum data value: Amax  
-  - Minimum data value: Amin  
-  - Average voltage_____: Aaverage  
-  - RMS voltage_________: Avrms  
-  - Standard deviation__: Asdev  
-  - Signal Frequency____: Afreqm  (Uses the signal mid point crossing point to determine the frequency)  
-  - Signal frequency____: Afreq   (Uses digital signal processing techniques)   
+  - Voltage range (Avrange)  
+  - Maximum data value (Amax)  
+  - Minimum data value (Amin)  
+  - Average voltage (Aaverage)  
+  - RMS voltage (Avrms)  
+  - Standard deviation (Asdev)  
+  - Signal Frequency (Afreqm)  <Uses the signal mid point crossing point to determine the frequency>  
+  - Signal frequency (Afreq)   <Uses digital signal processing techniques>   
 
 A useful integer padding function is also available ( mylib.DRPpad(I, n, " ") )  
   - This returns a string using integer I, with a width of n characters, left padded with the character within the quotes.  
