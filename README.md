@@ -14,8 +14,8 @@ The following data analysis values are available:
   - Average voltage (Aaverage)  
   - RMS voltage (Avrms)  
   - Standard deviation (Asdev)  
-  - Signal Frequency (Afreqm)  <Uses the signal mid point crossing point to determine the frequency>  
-  - Signal frequency (Afreq)   <Uses digital signal processing techniques>   
+  - Signal Frequency (Afreqm)  Uses the signal mid point crossing point to determine the frequency  
+  - Signal frequency (Afreq)   Uses digital signal processing techniques   
 
 A useful integer padding function is also available ( mylib.DRPpad(I, n, " ") )  
   - This returns a string using integer I, with a width of n characters, left padded with the character within the quotes.  
