@@ -18,4 +18,4 @@ The following data analysis values are available:
   - Signal frequency__: Afreq   (Uses digital signal processing techniques)   
 
 A useful integer padding function is also available ( mylib.DRPpad(I, n, " ") )  
-  - This returns a string using integer I, with a width of n characters, padded with the character within the quotes.  
+  - This returns a string using integer I, with a width of n characters, left padded with the character within the quotes.  
