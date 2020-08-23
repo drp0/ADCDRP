@@ -8,7 +8,7 @@ It includes two Serial monitor graph options:
 
 Data analysis requires the data sampling frequency, voltage reference, array size and the name of the array.  
 The following data analysis values are available:  
-  - Voltage range_____: Avrange  
+  - Voltage range_______: Avrange  
   - Maximum data value: Amax  
   - Minimum data value: Amin  
   - Average voltage___: Aaverage  
