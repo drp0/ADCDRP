@@ -7,12 +7,13 @@ Padded string function
 Serial monitor graph.
 
 D.R.Patterson
-
 15/10/2015
 
 */
 
-boolean graphwithvoltage = true; // set to false to get without voltage
+float vref = 5.0;                // set to arduino board voltage
+                                 // measure if accuracy is required!
+boolean graphwithvoltage = true; // set to false to get a graph without voltage
 
 // drp Voltage analysis library
 #include <ADCDRP.h>
@@ -24,10 +25,9 @@ const float angle =  (incdeg * 71) / 4068; // angle increment in radians
 #define BUF_SIZE 320
 uint8_t buf[BUF_SIZE];
 
-char junk=' ';
-
 void setup(){
-Serial.begin(115200); // start serial for output
+char junk;
+Serial.begin(115200); delay(10);  // start serial for output
   while (Serial.available() > 0) junk = Serial.read();
 // setup the array with a sine wave
 float rad = 0;
@@ -42,9 +42,8 @@ Serial.println("Raw data:\n");
   Serial.print(" , ");
   Serial.println(buf[i]);
   }
-  
-float vref = 5; // the measuring reference voltage
-float vconvert = vref / 255;
+
+float vconvert = vref / 255.0;
 
 Serial.println();
 Serial.print(BUF_SIZE); Serial.println(" data point graph:");  
@@ -55,9 +54,9 @@ Serial.print(BUF_SIZE); Serial.println(" data point graph:");
   mylib.graph(BUF_SIZE, buf);
   }
 // The frequency is normally determined by the measuring conditions:
-float frequency = 270; // This should be in KHZ
+float myfrequency = 270.0;       // This is the measurement frequency in KHZ
 
-mylib.analyse(frequency, vref, BUF_SIZE, buf);
+mylib.analyse(myfrequency, vref, BUF_SIZE, buf);
 Serial.println("\nBuffer Analysis using ADCDRP\n");
 Serial.print("Maximum Value "); Serial.print(mylib.Amax);
 Serial.print(", "); Serial.print(mylib.Amax * vconvert); Serial.println(" V");
