@@ -53,8 +53,10 @@ Serial.print(BUF_SIZE); Serial.println(" data point graph:");
   }else{
   mylib.graph(BUF_SIZE, buf);
   }
-// The frequency is normally determined by the measuring conditions:
-float myfrequency = 270.0;       // This is the measurement frequency in KHZ
+
+// The measuring frequency is normally determined by the ADC method
+// (The measuring period can be calculated and converted to a frequency)
+float frequency = 270.0;         // This is the measurement frequency in KHZ      
 
 mylib.analyse(myfrequency, vref, BUF_SIZE, buf);
 Serial.println("\nBuffer Analysis using ADCDRP\n");
