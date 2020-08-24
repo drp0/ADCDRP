@@ -20,7 +20,7 @@ boolean graphwithvoltage = true; // set to false to get a graph without voltage
 ADCDRP mylib; // setup data type to converse with ADCDRP
 
 const float incdeg = 10;
-const float angle =  (incdeg * 71) / 4068; // angle increment in radians 
+const float angle =  (incdeg * 71.0) / 4068.0; // angle increment in radians 
 
 #define BUF_SIZE 320
 uint8_t buf[BUF_SIZE];
@@ -32,7 +32,7 @@ Serial.begin(115200); delay(10);  // start serial for output
 // setup the array with a sine wave
 float rad = 0;
   for (int i=0; i<BUF_SIZE ; i++){
-  buf[i] = char(sin(rad)*127 + 127.5);
+  buf[i] = char(sin(rad) * 127.0 + 127.5);
   rad += angle;
   }
   
