@@ -17,7 +17,7 @@ boolean graphwithvoltage = true; // set to false to get a graph without voltage
 
 // drp Voltage analysis library
 #include <ADCDRP.h>
-ADCDRP mylib; // setup data type to converse with ADCDRP
+ADCDRP mylib;                    // setup data type to converse with ADCDRP
 
 const float incdeg = 10;
 const float angle =  (incdeg * 71.0) / 4068.0; // angle increment in radians 
