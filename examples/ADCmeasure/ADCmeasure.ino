@@ -47,7 +47,7 @@ volatile unsigned long t2;
 volatile boolean isready;
 volatile uint16_t bufcount;
 
-byte prescalar = 8;                         // 4, 8, 16
+byte prescalar = 4;                         // 4, 8, 16
 
 void setup() {
 Serial.begin(115200); delay(250);
