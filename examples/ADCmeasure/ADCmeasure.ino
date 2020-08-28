@@ -12,6 +12,8 @@
 // The data is saved in bufa
 // The ADCDRP library plots and analyses the data
 
+// Measurement frequency can be altered with prescalar
+
 #include <ADCDRP.h>                         // drp Voltage analysis library
 ADCDRP mylib;                               // setup data type to converse with ADCDRP
 
@@ -45,6 +47,8 @@ volatile unsigned long t2;
 volatile boolean isready;
 volatile uint16_t bufcount;
 
+byte prescalar = 16;                         // 4, 8, 16
+
 void setup() {
 Serial.begin(115200); delay(250);
 pinMode(testpin,OUTPUT);
@@ -66,13 +70,18 @@ ADCSRB = 0;
 ADMUX  = sensor;                            // set up continuous sampling of analog pin sensor 
 mysbi(ADMUX, REFS0);                        // set reference voltage
 mysbi(ADMUX, ADLAR);                        // left align the ADC value- so we can read highest 8 bits from ADCH register
-ADCSRA |= (1 << ADPS1) | (1 << ADPS0);      // 144-145 KHz sampling frequency
+
+  if (prescalar ==  4) ADCSRA |= (1 << ADPS1);
+  if (prescalar ==  8) ADCSRA |= (1 << ADPS1) | (1 << ADPS0);
+  if (prescalar == 16) ADCSRA |= (1 << ADPS2); 
+                                            // prescalar 4: ~230 KHz (Mega)
+                                            // prescalar 8: ~130 KHz, prescalar 16: ~70 KHz
 mysbi(ADCSRA, ADATE);                       // enable auto trigger
 mysbi(ADCSRA, ADIE);                        // Activate ADC Conversion Complete Interrupt
 mysbi(ADCSRA, ADEN);                        // enable ADC. Disable with mycbi(ADCSRA, ADEN);
 mysbi(ADCSRA, ADSC);                        // start ADC measurements on interrupt
-sei();                                      // enable interrupts
-t1 = micros();
+sei();
+t1 = micros();                                      // enable interrupts
 }
 
 void adcRepeat(){
@@ -83,8 +92,8 @@ delay(10);
 cli();
 mysbi(ADCSRA, ADEN);                        // enable ADC. Disable with mycbi(ADCSRA, ADEN);
 mysbi(ADCSRA, ADSC);                        // start ADC measurements on interrupt
-sei();                                      // enable interrupts
-t1 = micros();
+sei();
+t1 = micros();                              // enable interrupts
 }
 
 void loop() {
@@ -92,9 +101,10 @@ void loop() {
   analogWrite(testpin, 0);                  // pwm off
   mylib.graph(BUF_SIZE, bufa, vref);        // graph with voltages
   float myperiod = t2 - t1;                 // measurement period uS
-  float myfrequency = float(BUF_SIZE) * 1000.0 / myperiod;  // measurement frequency in KHz
+  float myfrequency = float(BUF_SIZE + 1) * 1000.0 / myperiod;  // measurement frequency in KHz
 
-  Serial.print("\nSample Period "); Serial.print(myperiod, 0); Serial.print(" uS");
+  Serial.print("\nPrescalar "); Serial.print(prescalar);
+  Serial.print(", Sample Period "); Serial.print(myperiod, 0); Serial.print(" uS");
   Serial.print(" Sample Frequency "); Serial.print(myfrequency, 2); Serial.println(" KHz,");
   mylib.analyse(myfrequency, vref, BUF_SIZE, bufa);
   Serial.println("\nBuffer Analysis using ADCDRP\n");
@@ -105,8 +115,8 @@ void loop() {
   Serial.print("Average Voltage "); Serial.print(mylib.Aaverage); Serial.println(" V");
   Serial.print("Voltage Range "); Serial.print(mylib.Avrange); Serial.println(" V");
   Serial.print("RMS Voltage "); Serial.print(mylib.Avrms); Serial.println(" V");
-  Serial.print("Frequency Estimate(midpoint) "); Serial.print(mylib.Afreqm); Serial.println(" Hz");
-  Serial.print("Frequency Estimate(dsp) "); Serial.print(mylib.Afreq); Serial.println(" Hz");
+  Serial.print("Frequency Estimate(midpoint) "); Serial.print(mylib.Afreqm, 1); Serial.println(" Hz");
+  Serial.print("Frequency Estimate(dsp) "); Serial.print(mylib.Afreq, 1); Serial.println(" Hz");
   Serial.print("Standard Deviation "); Serial.println(mylib.Asdev);
   Serial.println();
   Serial.flush();
