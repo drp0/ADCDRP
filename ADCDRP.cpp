@@ -57,7 +57,7 @@ Avrms = -1;
 Asdev = -1;
 }
 
-// Analyse a buffer to estimate the frequency based od mid voltage transitions
+// Analyse a buffer to estimate the frequency based on mid voltage transitions
 
 // Analyse a buffer
 // mfreq in Khz, refv in volts, Abufsize size of the data array,
