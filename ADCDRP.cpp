@@ -41,6 +41,9 @@ class-identifier.(unsigned long value, number of digits, pad character as string
 */
 
 #include "ADCDRP.h"
+#if defined (__SAM3X8E__)
+#include <avr/dtostrf.h>	// Due does not have this function by default
+#endif
 
 // <<constructor>> setup the default variables
 // to indicate no measurement so far
