@@ -146,33 +146,36 @@ int ffirstval, flastval;
 boolean ffirstone = false;
 float faddupperiod = 0;
 
-for (i = 0; i < (Abufsize-10); i++){
-    if (Adata[i] < fmidpoint){
-      for (int fj = i + 1; fj < (i + 11); fj++) {
-        if (Adata[fj] >= fmidpoint){
-        i = fj;
-          if (ffirstone == false){
-          ffirstval = fj;
-          ffirstone = true;        
-          } else {
-          fwaveno = fwaveno + 1;
-          flastval = fj;
-          faddupperiod = faddupperiod + flastval - ffirstval;
-          ffirstval = flastval;  
-          }
-        fj = i + 10;
-        }
-      }
-    }
-  }
-  
-  if (fwaveno > 0){
-  // mfreq in  Khz - fmyinterval in seconds
-  float fmyinterval = 1 / (mfreq * 1000);
-  Afreqm = fwaveno / (fmyinterval * faddupperiod);   
-  } 
-}
+	for (i = 0; i < (Abufsize - 8); i++) {
+		if (Adata[i] < fmidpoint) {
+			if (Adata[i + 1] >= fmidpoint) {
+			float tot = 0;
+				for (int fj = i + 2; fj < (i + 8); fj++) {
+          			tot += Adata[fj];
+				}
+				if (tot/6.0 > fmidpoint) {		// look for average rise 
+          				if (ffirstone == false){
+          				ffirstval = i + 1;
+          				ffirstone = true;        
+          				} else {
+          				fwaveno = fwaveno + 1;
+          				flastval = i + 1;
+          				faddupperiod = faddupperiod + flastval - ffirstval;
+          				ffirstval = flastval;  
+          				}
+        			i += 7;
+        			}
+			}
+    		}
+	}
 
+  
+	if (fwaveno > 0){
+  	// mfreq in  Khz - fmyinterval in seconds
+  	float fmyinterval = 1 / (mfreq * 1000);
+  	Afreqm = fwaveno / (fmyinterval * faddupperiod);   
+  	} 
+}
 
 void ADCDRP::graph(int Abufsize, uint8_t* Adata){
 graphit(Abufsize, Adata, 0);
