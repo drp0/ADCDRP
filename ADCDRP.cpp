@@ -146,7 +146,7 @@ int ffirstval, flastval;
 boolean ffirstone = false;
 float faddupperiod = 0;
 
-	for (i = 0; i < (Abufsize - 8); i++) {
+	for (i = 0; i < (Abufsize - 9); i++) {
 		if (Adata[i] < fmidpoint) {
 			if (Adata[i + 1] >= fmidpoint) {
 			float tot = 0;
