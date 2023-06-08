@@ -10,7 +10,7 @@ D.R.Patterson
   3)  Pad function to produce strings from unsigned integer with
   fixed width leading character padded format
 
- 23/10/15
+ 8/6/2023
  
 Following a call to analyse-
 class-identifier.analyse(Measuring frequency in Khz, reference voltage, buffer size, buffer)
