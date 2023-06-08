@@ -122,7 +122,7 @@ byte pd_state = 0;
   {
     sum_old = sum;
     sum = 0;
-    // multipy by 100 to create additional 2 digits of accuracy
+    // multiply by 100 to create additional 2 digits of accuracy
     for(int k=0; k < Abufsize-i; k++) sum += (100 * (Adata[k]-128)*(Adata[k+i]-128)) / 256;
   
     // Peak Detect State Machine
