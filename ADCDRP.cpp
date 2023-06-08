@@ -111,21 +111,19 @@ Avrms = Avrms * convert;
 Aaverage = Aaverage * convert;
 
 // estimate the observed frequency- independent of wave shape
-// 8/6/2023 sacrifice speed in manipulationg long values for accuracy
 float sample_freq = mfreq*1000;
-float sum_old;		// was long: increased accuracy if float
-float sum = 0;		// was long: increased accuracy if float
+long sum_old;
+long sum = 0;
 long thresh = 0;
 int lperiod = 0;
 byte pd_state = 0;
-
 
   for(i=0; i < Abufsize; i++)
   {
     sum_old = sum;
     sum = 0;
-    // divide by 256.0 not 256 for float accuracy
-    for(int k=0; k < Abufsize-i; k++) sum += (Adata[k]-128)*(Adata[k+i]-128)/256.0;
+    // multipy by 100 to create additional 2 digits of accuracy
+    for(int k=0; k < Abufsize-i; k++) sum += (100 * (Adata[k]-128)*(Adata[k+i]-128)) / 256;
   
     // Peak Detect State Machine
     if ( (pd_state == 2) && ((sum-sum_old) <= 0) ) 
@@ -135,7 +133,7 @@ byte pd_state = 0;
     }
     if ( (pd_state == 1) && (sum > thresh) && ((sum-sum_old) > 0) ) pd_state = 2;
     if (i==0) {
-      thresh = sum * 0.5;
+      thresh = 0.5 + sum * 0.5;		// improve rounding
       pd_state = 1;
     }
   }
